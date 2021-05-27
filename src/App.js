@@ -46,7 +46,7 @@ export default function App() {
     {
       name: "madhu",
       age: "20",
-      college: "jntu"
+      college: "Jntu"
     },
     {
       name: "dev",
@@ -68,8 +68,9 @@ export default function App() {
 
   const searchJobs = (searchKey) => {
     const text = data.filter((obj) =>
-      Object.keys(obj)
-      .some((key) => obj[key].includes(searchKey.toLowerCase()))
+      Object.keys(obj).some((key) =>
+        obj[key.toLowerCase()].includes(searchKey.toLowerCase())
+      )
     );
     setfilterData(text);
     if (searchKey !== "") {
