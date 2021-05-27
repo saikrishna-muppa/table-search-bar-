@@ -69,7 +69,7 @@ export default function App() {
   const searchJobs = (searchKey) => {
     const text = data.filter((obj) =>
       Object.keys(obj).some((key) =>
-        obj[key.toLowerCase()].includes(searchKey.toLowerCase())
+        obj[key].toLowerCase().includes(searchKey.toLowerCase())
       )
     );
     setfilterData(text);
