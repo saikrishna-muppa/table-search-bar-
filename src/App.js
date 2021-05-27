@@ -65,32 +65,18 @@ export default function App() {
     }
   ];
 
+  // const [filterdata, setfilterData] = useState("");
+
   const [filterdata, setfilterData] = useState(data);
 
-  const searchJobs = (searchWord) => {
-    console.log("searchWord", searchWord);
-    if (searchWord !== "") {
-      // console.log(searchWord);
-
-      const newData = data.filter((item) => {
-        const name = item.name ? item.name.toUpperCase() : "".toUpperCase();
-        const college = item.college
-          ? item.college.toUpperCase()
-          : "".toUpperCase();
-        const age = item.age;
-        const searchWordData = searchWord.toUpperCase();
-
-        if (name.indexOf(searchWordData) > -1) {
-          return name.indexOf(searchWordData) > -1;
-        } else if (college.indexOf(searchWordData) > -1) {
-          return college.indexOf(searchWordData) > -1;
-        } else if (age.indexOf(searchWordData) > -1) {
-          return age.indexOf(searchWordData) > -1;
-        }
-      });
-      setfilterData(newData);
+  const searchJobs = (searchKey) => {
+    const text = data.filter((obj) =>
+      Object.keys(obj).some((key) => obj[key].includes(searchKey))
+    );
+    setfilterData(text);
+    if (searchKey !== "") {
+      return text;
     } else {
-      // console.log("null");
       setfilterData(data);
     }
   };
@@ -121,6 +107,29 @@ export default function App() {
           </tr>
         </thead>
         {tableData()}
+        {/* {data
+          .filter((item) => {
+            if (filterdata === "") {
+              return item;
+            } else if (
+              item.name.toLowerCase().includes(filterdata.toLowerCase())
+            ) {
+              return item.name.toLowerCase().includes(filterdata.toLowerCase());
+            } else if (
+              item.college.toLowerCase().includes(filterdata.toLowerCase())
+            ) {
+        return item.college.toLowerCase().includes(filterdata.toLowerCase());
+            }
+          })
+          .map((user, index) => {
+            return (
+              <tr>
+                <td>{user.name}</td>
+                <td>{user.age} </td>
+                <td>{user.college} </td>
+              </tr>
+            );
+          })} */}
       </table>
     </div>
   );
