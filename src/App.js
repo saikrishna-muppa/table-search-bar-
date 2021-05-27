@@ -64,14 +64,12 @@ export default function App() {
       college: "22vits"
     }
   ];
-
-  // const [filterdata, setfilterData] = useState("");
-
   const [filterdata, setfilterData] = useState(data);
 
   const searchJobs = (searchKey) => {
     const text = data.filter((obj) =>
-      Object.keys(obj).some((key) => obj[key].includes(searchKey))
+      Object.keys(obj)
+      .some((key) => obj[key].includes(searchKey.toLowerCase()))
     );
     setfilterData(text);
     if (searchKey !== "") {
