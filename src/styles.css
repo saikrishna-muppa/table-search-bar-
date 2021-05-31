@@ -18,3 +18,10 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.filter-btn {
+  background-color: #ebf4fb;
+  border-color: #0079ca;
+  color: #0079ca;
+  font-weight: 500;
+}
