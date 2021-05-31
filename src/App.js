@@ -86,6 +86,8 @@ export default function App() {
         <tr key={index}>
           <td> {user.name} </td>
           <td> {user.age} </td>
+          <td>{user.attendance} </td>
+          <td>{user.rating} </td>
           <td> {user.college} </td>
         </tr>
       );
