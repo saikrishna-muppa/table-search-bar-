@@ -31,3 +31,24 @@ tr:nth-child(even) {
 .filter-options {
   margin: 20px 0 0 0;
 }
+.condtion-btn {
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+select {
+  background-color: #fff;
+  border: 1px solid #c2cdd6;
+  border-radius: 4px;
+  box-shadow: none !important;
+  height: 40px;
+  min-width: 100px;
+  padding-bottom: 7px;
+  padding-right: 32px;
+  padding-top: 7px;
+  text-align: left;
+}
+.cross-btn {
+  border: none;
+}

@@ -137,48 +137,78 @@ export default function App() {
         </button> */}
 
         {fields.map((field, idx) => {
-          return (
-            <div key={`${field}-${idx}`} className="filter-options">
-              <button type="button" onClick={() => handleRemove(idx)}>
-                X
-              </button>
-              <button onClick={() => setCondition(!condition)}>
-                {condition ? <div>AND</div> : <div>OR</div>}{" "}
-              </button>
-              <select onChange={(e) => setFirst(e.target.value)}>
-                <option value="age">age</option>
-                <option value="rating">rating</option>
-                <option value="attendance">attendance</option>
-              </select>
-              <select onChange={(e) => setSecond(e.target.value)}>
-                <option value="age">age</option>
-                <option value="rating">rating</option>
-                <option value="attendance">attendance</option>
-              </select>
-              <button onClick={() => applyFilter()}>Apply</button>
-              <Multiselect
-                options={objectArray}
-                onSelect={checkedItemList}
-                displayValue="key"
-                showCheckbox={true}
-              >
-                <input value="name" placeholder="helllo" />{" "}
-              </Multiselect>
-              {/* <input onChange={() => checkedItemList()}></input> */}
-
-              {/* {filterdata.map((test, index) => (
-                <div key={index}>
-                  <label>{test.name}</label>
-                  <input
-                    type="checkbox"
-                    name={test.name}
-                    checked={isChecked[test.name]}
-                    onChange={handleSingleCheck}
-                  />
-                </div>
-              ))} */}
-            </div>
-          );
+          if (idx === 0) {
+            return (
+              <div key={`${field}-${idx}`} className="filter-options">
+                <button
+                  className="cross-btn"
+                  type="button"
+                  onClick={() => handleRemove(idx)}
+                >
+                  X
+                </button>
+                <button
+                  className="condtion-btn"
+                  //  onClick={() => setCondition(!condition)}
+                >
+                  {/* {condition ? <div>sh</div> : <div>OR</div>}{" "} */}
+                  show
+                </button>
+                <select onChange={(e) => setFirst(e.target.value)}>
+                  <option value="age">age</option>
+                  <option value="rating">rating</option>
+                  <option value="attendance">attendance</option>
+                </select>
+                <select onChange={(e) => setSecond(e.target.value)}>
+                  <option value="age">age</option>
+                  <option value="rating">rating</option>
+                  <option value="attendance">attendance</option>
+                </select>
+                <button onClick={() => applyFilter()}>Apply</button>
+                {/* <Multiselect
+                  options={objectArray}
+                  onSelect={checkedItemList}
+                  displayValue="key"
+                  showCheckbox={true}
+                /> */}
+              </div>
+            );
+          } else {
+            return (
+              <div key={`${field}-${idx}`} className="filter-options">
+                <button
+                  className="cross-btn"
+                  type="button"
+                  onClick={() => handleRemove(idx)}
+                >
+                  X
+                </button>
+                <button
+                  className="condtion-btn"
+                  onClick={() => setCondition(!condition)}
+                >
+                  {condition ? <div>AND</div> : <div>OR</div>}{" "}
+                </button>
+                <select onChange={(e) => setFirst(e.target.value)}>
+                  <option value="age">age</option>
+                  <option value="rating">rating</option>
+                  <option value="attendance">attendance</option>
+                </select>
+                <select onChange={(e) => setSecond(e.target.value)}>
+                  <option value="age">age</option>
+                  <option value="rating">rating</option>
+                  <option value="attendance">attendance</option>
+                </select>
+                <button onClick={() => applyFilter()}>Apply</button>
+                <Multiselect
+                  options={objectArray}
+                  onSelect={checkedItemList}
+                  displayValue="key"
+                  showCheckbox={true}
+                />
+              </div>
+            );
+          }
         })}
         <button type="button" onClick={() => handleAdd()}>
           + addFilter
