@@ -148,7 +148,7 @@ export default function App() {
                   X
                 </button>
                 <button
-                  className="condtion-btn"
+                  className="condition-btn"
                   //  onClick={() => setCondition(!condition)}
                 >
                   {/* {condition ? <div>sh</div> : <div>OR</div>}{" "} */}
@@ -165,12 +165,12 @@ export default function App() {
                   <option value="attendance">attendance</option>
                 </select>
                 <button onClick={() => applyFilter()}>Apply</button>
-                {/* <Multiselect
+                <Multiselect
                   options={objectArray}
                   onSelect={checkedItemList}
                   displayValue="key"
                   showCheckbox={true}
-                /> */}
+                />
               </div>
             );
           } else {
@@ -184,7 +184,7 @@ export default function App() {
                   X
                 </button>
                 <button
-                  className="condtion-btn"
+                  className="condition-btn"
                   onClick={() => setCondition(!condition)}
                 >
                   {condition ? <div>AND</div> : <div>OR</div>}{" "}
