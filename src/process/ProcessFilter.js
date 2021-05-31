@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { data } from "../ClausesFilter/FilterizationData";
 import { Modal, Button } from "antd";
+import { FiFilter } from "react-icons/fi";
 import "antd/dist/antd.css";
 export default function App() {
   const [fields, setFields] = useState([{ value: null }]);
@@ -90,7 +91,7 @@ export default function App() {
         onChange={(e) => filterFunction(e.target.value.toString())}
       ></input>
       <Button type="primary" onClick={showModal}>
-        Open Modal
+        <FiFilter /> Filter
       </Button>
       <Modal
         // title="Basic Modal"
