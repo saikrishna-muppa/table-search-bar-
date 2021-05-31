@@ -5,15 +5,13 @@ export default function App() {
   const [condition, setCondition] = useState(false);
   const [first, setFirst] = useState("age");
   const [second, setSecond] = useState("attendance");
-  const searchJobs = (searchKey) => {
-    const text = data.filter((obj) =>
-      Object.keys(obj).some((key) =>
-        obj[key].toLowerCase().includes(searchKey.toLowerCase())
-      )
-    );
-    setfilterData(text);
-    if (searchKey !== "") {
-      return text;
+  const filterFunction = (searchTerm, objKey) => {
+    const filteredData = filterdata.filter((obj) => {
+      return obj[objKey].toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setfilterData(filteredData);
+    if (searchTerm !== "") {
+      return filteredData;
     } else {
       setfilterData(data);
     }
@@ -39,7 +37,7 @@ export default function App() {
     } else {
       sorted = [...data].sort((a, b) => b[sortProperty] - a[sortProperty]);
     }
-    console.log(sorted, "sorted");
+    console.log(sortArray, "sorted");
     setfilterData(sorted);
   };
 
@@ -65,18 +63,18 @@ export default function App() {
 
         return b[first] - a[first] || b[second] - a[second];
       });
-      console.log("filterData", first + "AND" + second);
+      console.log("filterData:", first + "AND" + second);
       setfilterData(sorted);
     } else {
-      var sorted;
+      // var sorted;
       sorted = [...data].sort((a, b) => {
         // console.log(b.attendance - a.attendance || b.rating - a.rating, "ww");
 
-        return b[first] - a[first] || b[second] - a[second];
+        return b[second] - a[second] || b[first] - a[first];
       });
 
       setfilterData(sorted);
-      console.log("filterData", first + "OR" + second);
+      console.log("filterData:", first + "OR" + second);
     }
   };
   return (
@@ -85,7 +83,6 @@ export default function App() {
         <option value="age">age</option>
         <option value="rating">rating</option>
         <option value="attendance">attendance</option>
-        <option value="ratingandattendance">rating And attendance</option>
       </select>
       <button onClick={() => setCondition(!condition)}>
         {condition ? <div>AND</div> : <div>OR</div>}{" "}
@@ -94,12 +91,25 @@ export default function App() {
         <option value="age">age</option>
         <option value="rating">rating</option>
         <option value="attendance">attendance</option>
-        <option value="ratingandattendance">rating And attendance</option>
       </select>
       <button onClick={() => applyFilter()}>Apply</button>
       <input
         type="text"
-        onChange={(e) => searchJobs(e.target.value.toString())}
+        name="name"
+        placeholder="Name"
+        onChange={(e) => filterFunction(e.target.value, "name")}
+      ></input>
+      <input
+        type="text"
+        name="age"
+        placeholder="Age"
+        onChange={(e) => filterFunction(e.target.value, "age")}
+      ></input>
+      <input
+        type="text"
+        name="college"
+        placeholder="College"
+        onChange={(e) => filterFunction(e.target.value, "college")}
       ></input>
       <table>
         <thead>
