@@ -99,20 +99,25 @@ export default function App() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <button type="button" onClick={() => handleAdd()}>
+        {/* <button type="button" onClick={() => handleAdd()}>
           + addFilter
-        </button>
+        </button> */}
         {fields.map((field, idx) => {
           return (
             <div key={`${field}-${idx}`}>
+              <button type="button" onClick={() => handleRemove(idx)}>
+                X
+              </button>
+              <button onClick={() => setCondition(!condition)}>
+                {condition ? <div>AND</div> : <div>OR</div>}{" "}
+              </button>
+
               <select onChange={(e) => setFirst(e.target.value)}>
                 <option value="age">age</option>
                 <option value="rating">rating</option>
                 <option value="attendance">attendance</option>
               </select>
-              <button onClick={() => setCondition(!condition)}>
-                {condition ? <div>AND</div> : <div>OR</div>}{" "}
-              </button>
+
               <select onChange={(e) => setSecond(e.target.value)}>
                 <option value="age">age</option>
                 <option value="rating">rating</option>
@@ -123,12 +128,12 @@ export default function App() {
                 type="text"
                 onChange={(e) => filterFunction(e.target.value.toString())}
               ></input>
-              <button type="button" onClick={() => handleRemove(idx)}>
-                X
-              </button>
             </div>
           );
         })}
+        <button type="button" onClick={() => handleAdd()}>
+          + addFilter
+        </button>
       </Modal>
 
       <table>
