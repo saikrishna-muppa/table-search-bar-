@@ -7,7 +7,7 @@ export const data = [
     college: "vits"
   },
   {
-    name: "sai",
+    name: "saikri",
     age: "22",
     attendance: "75",
     rating: "3",

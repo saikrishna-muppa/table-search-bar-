@@ -2,15 +2,28 @@ import { useState } from "react";
 import { data } from "../ClausesFilter/FilterizationData";
 import { Modal, Button } from "antd";
 import { FiFilter } from "react-icons/fi";
+import { Multiselect } from "multiselect-react-dropdown";
 import "antd/dist/antd.css";
+
 export default function App() {
+  const objectArray = [
+    { key: "Option 1", cat: "Group 1" },
+    { key: "Option 2", cat: "Group 1" },
+    { key: "Option 3", cat: "Group 1" },
+    { key: "Option 4", cat: "Group 2" },
+    { key: "Option 5", cat: "Group 2" },
+    { key: "Option 6", cat: "Group 2" },
+    { key: "Option 7", cat: "Group 2" }
+  ];
+
   const [fields, setFields] = useState([{ value: null }]);
   const [filterdata, setfilterData] = useState(data);
   const [condition, setCondition] = useState(false);
   const [first, setFirst] = useState("age");
   const [second, setSecond] = useState("attendance");
-
+  const [isChecked, setIsChecked] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
   const filterFunction = (searchKey) => {
     const text = data.filter((obj) =>
       Object.keys(obj).some((key) =>
@@ -84,6 +97,25 @@ export default function App() {
     values.splice(i, 1);
     setFields(values);
   }
+
+  const handleSingleCheck = (e) => {
+    setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
+  };
+  const checkedItemList = () => {
+    filterdata.map((test, index) => (
+      <div key={index}>
+        <label>{test.name}</label>
+        <input
+          type="checkbox"
+          name={test.name}
+          checked={isChecked[test.name]}
+          onChange={handleSingleCheck}
+        />
+      </div>
+    ));
+    // setfilterData(checktedItemData);
+  };
+
   return (
     <div className="App">
       <input
@@ -103,6 +135,7 @@ export default function App() {
         {/* <button type="button" onClick={() => handleAdd()}>
           + addFilter
         </button> */}
+
         {fields.map((field, idx) => {
           return (
             <div key={`${field}-${idx}`} className="filter-options">
@@ -123,12 +156,27 @@ export default function App() {
                 <option value="attendance">attendance</option>
               </select>
               <button onClick={() => applyFilter()}>Apply</button>
-              <input
-                type="text"
-                placeholder="Search here"
-                onChange={(e) => filterFunction(e.target.value.toString())}
-              ></input>
-              {/* } */}
+              <Multiselect
+                options={objectArray}
+                onSelect={checkedItemList}
+                displayValue="key"
+                showCheckbox={true}
+              >
+                <input value="name" placeholder="helllo" />{" "}
+              </Multiselect>
+              {/* <input onChange={() => checkedItemList()}></input> */}
+
+              {/* {filterdata.map((test, index) => (
+                <div key={index}>
+                  <label>{test.name}</label>
+                  <input
+                    type="checkbox"
+                    name={test.name}
+                    checked={isChecked[test.name]}
+                    onChange={handleSingleCheck}
+                  />
+                </div>
+              ))} */}
             </div>
           );
         })}
