@@ -25,3 +25,9 @@ tr:nth-child(even) {
   color: #0079ca;
   font-weight: 500;
 }
+.ant-modal-content {
+  max-margin: -11% -70% 0 60%;
+}
+.filter-options {
+  margin: 20px 0 0 0;
+}
