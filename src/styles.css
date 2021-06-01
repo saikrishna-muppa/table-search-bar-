@@ -20,9 +20,18 @@ tr:nth-child(even) {
 }
 
 .filter-btn {
-  background-color: #ebf4fb;
-  border-color: #0079ca;
-  color: #0079ca;
+  background-color: #ebf4fb !important;
+  border-color: #0079ca !important;
+  color: #0079ca !important;
+  font-weight: 500 !important;
+  padding: 10px 20px 30px 20px !important;
+  margin-left: 10px !important;
+}
+.filter-btn:hover {
+  background-color: #0079ca;
+  color: #ebf4fb;
+  padding: 10px 20px 30px 20px;
+  margin-left: 10px;
   font-weight: 500;
 }
 .ant-modal-content {
@@ -56,4 +65,10 @@ select {
   width: 366px;
   padding: 10px 0;
   border-radius: 5px;
+}
+.filter-btn {
+}
+svg {
+  padding-bottom: -15px;
+  font-size: 20px;
 }

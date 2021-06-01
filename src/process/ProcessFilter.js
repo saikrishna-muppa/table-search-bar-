@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { data } from "../ClausesFilter/FilterizationData";
-import { Modal, Button } from "antd";
+import { Modal, Button, Popover } from "antd";
 import { FiFilter } from "react-icons/fi";
 import { Multiselect } from "multiselect-react-dropdown";
 import "antd/dist/antd.css";
@@ -115,7 +115,12 @@ export default function App() {
     ));
     // setfilterData(checktedItemData);
   };
-  // const icon = <FiFilter />;
+  const content = (
+    <div>
+      <p>Content</p>
+      <p>Content</p>
+    </div>
+  );
   return (
     <div className="App">
       <input
@@ -124,9 +129,12 @@ export default function App() {
         placeholder="Search here"
         onChange={(e) => filterFunction(e.target.value.toString())}
       ></input>
-      <Button type="primary" onClick={showModal}>
+      <Button className="filter-btn" onClick={showModal}>
         <FiFilter /> Filter
       </Button>
+      {/* <Button type="primary" onClick={content()}>
+        Hover me
+      </Button> */}
       <Modal
         // title="Basic Modal"
         visible={isModalVisible}
