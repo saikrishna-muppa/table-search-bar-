@@ -24,7 +24,7 @@ export default function App() {
       rating: "rating",
       attendance: "attendance"
     };
-    console.log(type, "type");
+    console.log(sortArray, "type");
     const sortProperty = types[type];
     console.log(sortProperty, "sortProperty");
     var sorted;

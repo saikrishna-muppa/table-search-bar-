@@ -52,3 +52,8 @@ select {
 .cross-btn {
   border: none;
 }
+.main-search {
+  width: 366px;
+  padding: 10px 0;
+  border-radius: 5px;
+}

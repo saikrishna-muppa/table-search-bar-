@@ -23,7 +23,7 @@ export default function App() {
   const [second, setSecond] = useState("attendance");
   const [isChecked, setIsChecked] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const filterFunction = (searchKey) => {
     const text = data.filter((obj) =>
       Object.keys(obj).some((key) =>
@@ -115,10 +115,11 @@ export default function App() {
     ));
     // setfilterData(checktedItemData);
   };
-
+  // const icon = <FiFilter />;
   return (
     <div className="App">
       <input
+        className="main-search"
         type="text"
         placeholder="Search here"
         onChange={(e) => filterFunction(e.target.value.toString())}
