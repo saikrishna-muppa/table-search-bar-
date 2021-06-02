@@ -2,28 +2,100 @@ import { useState } from "react";
 import { data } from "../ClausesFilter/FilterizationData";
 import { Modal, Button, Popover } from "antd";
 import { FiFilter } from "react-icons/fi";
-import { Multiselect } from "multiselect-react-dropdown";
+// import { Multiselect } from "multiselect-react-dropdown";
+import MultiSelect from "react-multi-select-component";
 import "antd/dist/antd.css";
-
+// import {
+//   CheckBoxSelection,
+//   Inject,
+//   MultiSelectComponent
+// } from "@syncfusion/ej2-react-dropdowns";
 export default function App() {
   const objectArray = [
-    { key: "Option 1", cat: "Group 1" },
-    { key: "Option 2", cat: "Group 1" },
-    { key: "Option 3", cat: "Group 1" },
-    { key: "Option 4", cat: "Group 2" },
-    { key: "Option 5", cat: "Group 2" },
-    { key: "Option 6", cat: "Group 2" },
-    { key: "Option 7", cat: "Group 2" }
+    { label: "Grapes 🍇", value: "grapes" },
+    { label: "Mango 🥭", value: "mango" },
+    { label: "Strawberry 🍓", value: "strawberry" }
+  ];
+  const firstDropDownList = [
+    {
+      name: "Name",
+      status: "input",
+      content: [
+        { text: "contains" },
+        { text: "isequal" },
+        { text: "is not equal" },
+        { text: "does not equal" }
+      ]
+    },
+    {
+      name: "Assigness",
+      status: "mutliplenames",
+      content: [{ text: "contains" }, { text: "does not contains" }]
+    },
+    {
+      name: "Started",
+      status: "inputdate",
+      content: [
+        { text: "isbefore" },
+        { text: "is after" },
+        { text: "is between" }
+      ]
+    },
+    {
+      name: "Activity",
+      status: "inputdate",
+      content: [
+        { text: "isbefore" },
+        { text: "is after" },
+        { text: "is between" }
+      ]
+    },
+    {
+      name: "Due",
+      status: "inputdate",
+      content: [
+        { text: "isbefore" },
+        { text: "is after" },
+        { text: "is between" }
+      ]
+    },
+    {
+      name: "Completed",
+      status: "inputdate",
+      content: [
+        { text: "isbefore" },
+        { text: "is after" },
+        { text: "is between" }
+      ]
+    },
+    {
+      name: "Status",
+      status: "mutliplecolors",
+      content: [{ text: "contains" }, { text: "does not contains" }]
+    },
+    {
+      name: "OverDueTask",
+      status: "mutliplecolors",
+      content: [{ text: "contains" }, { text: "does not contains" }]
+    },
+    {
+      name: "TaskCOmpleted",
+      status: "mutliplecolors",
+      content: [{ text: "contains" }, { text: "does not contains" }]
+    }
   ];
 
   const [fields, setFields] = useState([{ value: null }]);
   const [filterdata, setfilterData] = useState(data);
   const [condition, setCondition] = useState(false);
   const [first, setFirst] = useState("age");
-  const [second, setSecond] = useState("attendance");
+  const [second, setSecond] = useState("age");
+  const [firstValue, setFirstValue] = useState("age");
+  const [secondValue, setSecondValue] = useState("age");
   const [isChecked, setIsChecked] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const [selected, setSelected] = useState([]);
+
   const filterFunction = (searchKey) => {
     const text = data.filter((obj) =>
       Object.keys(obj).some((key) =>
@@ -98,29 +170,167 @@ export default function App() {
     setFields(values);
   }
 
-  const handleSingleCheck = (e) => {
-    setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
-  };
-  const checkedItemList = () => {
-    filterdata.map((test, index) => (
-      <div key={index}>
-        <label>{test.name}</label>
-        <input
-          type="checkbox"
-          name={test.name}
-          checked={isChecked[test.name]}
-          onChange={handleSingleCheck}
-        />
-      </div>
-    ));
-    // setfilterData(checktedItemData);
-  };
-  const content = (
-    <div>
-      <p>Content</p>
-      <p>Content</p>
+  // const handleSingleCheck = (e) => {
+  //   setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
+  // };
+  // const checkedItemList = () => {
+  //   filterdata.map((test, index) => (
+  //     <div key={index}>
+  //       <label>{test.name}</label>
+  //       <input
+  //         type="checkbox"
+  //         name={test.name}
+  //         checked={isChecked[test.name]}
+  //         onChange={handleSingleCheck}
+  //       />
+  //     </div>
+  //   ));
+  //   // setfilterData(checktedItemData);
+  // };
+  const content = (idx) => (
+    <div className="pop-over-modal">
+      {/* <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      > */}
+      {fields.map((field, idx) => {
+        if (idx === 0) {
+          return (
+            <div key={`${field}-${idx}`} className="filter-options">
+              <button
+                className="cross-btn"
+                type="button"
+                onClick={() => handleRemove(idx)}
+              >
+                X
+              </button>
+              <button className="condition-btn">
+                <div>SHOW</div>
+              </button>
+
+              <select
+                id="store"
+                onChange={(e) => setFirst(e.target.value)}
+                onClick={() => applyFilter()}
+              >
+                {firstDropDownList.map((item, index) => {
+                  return <option value={item.name}>{item.name}</option>;
+                })}
+              </select>
+
+              <select
+                onChange={(e) => {
+                  setSecond(e.target.value);
+
+                  // setSecond(e.target.value);
+                }}
+                onClick={() => applyFilter()}
+              >
+                {firstDropDownList.map((item, index) => {
+                  return (
+                    item.name === first &&
+                    item.content.map((val, idx) => {
+                      return <option key={val.text}>{val.text}</option>;
+                    })
+                  );
+                })}
+              </select>
+              {
+                <div>
+                  {" "}
+                  {firstDropDownList.map((i, n) => {
+                    console.log(i.status, "status");
+                    if (i.status === "input") {
+                      return (
+                        // <select><option>{i.status}</option> </select>
+                        <input placeholder="hee" />
+                      );
+                    } else if (i.status === "mutliplenames") {
+                      <select>
+                        <option>{i.status}</option>{" "}
+                      </select>;
+                    }
+                  })}{" "}
+                </div>
+              }
+              <MultiSelect
+                options={objectArray}
+                value={selected}
+                onChange={setSecond}
+                displayValue="key"
+                labelledBy={"Select"}
+              />
+            </div>
+          );
+        } else {
+          return (
+            <div key={`${field}-${idx}`} className="filter-options">
+              <button
+                className="cross-btn"
+                type="button"
+                onClick={() => handleRemove(idx)}
+              >
+                X
+              </button>
+              <button
+                className="condition-btn"
+                onClick={() => setCondition(!condition)}
+              >
+                {condition ? <div>AND</div> : <div>OR</div>}
+              </button>
+              <select
+                onChange={(e) => setFirstValue(e.target.value)}
+                onClick={() => applyFilter()}
+              >
+                {firstDropDownList.map((item, index) => {
+                  return <option value={item.name}>{item.name}</option>;
+                })}
+                {/* <option value="Name">Name</option>
+                <option value="Assigness">Assigness</option>
+                <option value="Started">Started</option>
+                <option value="Activity">Activity</option>
+                <option value="Due">Due</option>
+                <option value="Completed">Completed</option>
+                <option value="Status">Status</option> */}
+              </select>
+              <select
+                onChange={(e) => setSecondValue(e.target.value)}
+                onClick={() => applyFilter()}
+              >
+                {firstDropDownList.map((item, index) => {
+                  return (
+                    item.name === firstValue &&
+                    item.content.map((val, idx) => {
+                      return <option value={val.text}>{val.text}</option>;
+                    })
+                  );
+                })}
+              </select>
+
+              <MultiSelect
+                options={firstDropDownList}
+                value={selected}
+                onChange={setSelected}
+                displayValue="status"
+                labelledBy={"Select"}
+              />
+            </div>
+          );
+        }
+      })}
+      <button
+        className="addfilter-btn"
+        type="button"
+        onClick={() => handleAdd()}
+      >
+        + addFilter
+      </button>
+      {/* </Modal> */}
     </div>
   );
+
   return (
     <div className="App">
       <input
@@ -129,101 +339,13 @@ export default function App() {
         placeholder="Search here"
         onChange={(e) => filterFunction(e.target.value.toString())}
       ></input>
-      <Button className="filter-btn" onClick={showModal}>
-        <FiFilter /> Filter
-      </Button>
-      {/* <Button type="primary" onClick={content()}>
-        Hover me
-      </Button> */}
-      <Modal
-        // title="Basic Modal"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        {/* <button type="button" onClick={() => handleAdd()}>
-          + addFilter
-        </button> */}
-
-        {fields.map((field, idx) => {
-          if (idx === 0) {
-            return (
-              <div key={`${field}-${idx}`} className="filter-options">
-                <button
-                  className="cross-btn"
-                  type="button"
-                  onClick={() => handleRemove(idx)}
-                >
-                  X
-                </button>
-                <button
-                  className="condition-btn"
-                  //  onClick={() => setCondition(!condition)}
-                >
-                  {/* {condition ? <div>sh</div> : <div>OR</div>}{" "} */}
-                  show
-                </button>
-                <select onChange={(e) => setFirst(e.target.value)}>
-                  <option value="age">age</option>
-                  <option value="rating">rating</option>
-                  <option value="attendance">attendance</option>
-                </select>
-                <select onChange={(e) => setSecond(e.target.value)}>
-                  <option value="age">age</option>
-                  <option value="rating">rating</option>
-                  <option value="attendance">attendance</option>
-                </select>
-                <button onClick={() => applyFilter()}>Apply</button>
-                <Multiselect
-                  options={objectArray}
-                  onSelect={checkedItemList}
-                  displayValue="key"
-                  showCheckbox={true}
-                />
-              </div>
-            );
-          } else {
-            return (
-              <div key={`${field}-${idx}`} className="filter-options">
-                <button
-                  className="cross-btn"
-                  type="button"
-                  onClick={() => handleRemove(idx)}
-                >
-                  X
-                </button>
-                <button
-                  className="condition-btn"
-                  onClick={() => setCondition(!condition)}
-                >
-                  {condition ? <div>AND</div> : <div>OR</div>}{" "}
-                </button>
-                <select onChange={(e) => setFirst(e.target.value)}>
-                  <option value="age">age</option>
-                  <option value="rating">rating</option>
-                  <option value="attendance">attendance</option>
-                </select>
-                <select onChange={(e) => setSecond(e.target.value)}>
-                  <option value="age">age</option>
-                  <option value="rating">rating</option>
-                  <option value="attendance">attendance</option>
-                </select>
-                <button onClick={() => applyFilter()}>Apply</button>
-                <Multiselect
-                  options={objectArray}
-                  onSelect={checkedItemList}
-                  displayValue="key"
-                  showCheckbox={true}
-                />
-              </div>
-            );
-          }
-        })}
-        <button type="button" onClick={() => handleAdd()}>
-          + addFilter
-        </button>
-      </Modal>
-
+      <Popover content={content}>
+        <Button className="filter-btn" onClick={showModal}>
+          <div className="filter-btn-text">
+            <FiFilter /> Filter
+          </div>
+        </Button>
+      </Popover>
       <table>
         <thead>
           <tr>
@@ -234,30 +356,7 @@ export default function App() {
             <th>college</th>
           </tr>
         </thead>
-        {tableData()}
-        {/* {data
-          .filter((item) => {
-            if (filterdata === "") {
-              return item;
-            } else if (
-              item.name.toLowerCase().includes(filterdata.toLowerCase())
-            ) {
-              return item.name.toLowerCase().includes(filterdata.toLowerCase());
-            } else if (
-              item.college.toLowerCase().includes(filterdata.toLowerCase())
-            ) {
-        return item.college.toLowerCase().includes(filterdata.toLowerCase());
-            }
-          })
-          .map((user, index) => {
-            return (
-              <tr>
-                <td>{user.name}</td>
-                <td>{user.age} </td>
-                <td>{user.college} </td>
-              </tr>
-            );
-          })} */}
+        <tbody>{tableData()}</tbody>
       </table>
     </div>
   );
