@@ -1,97 +1,22 @@
 import { useState } from "react";
-import { data } from "../ClausesFilter/FilterizationData";
+import { data } from "./FF";
+import { firstDropDownList } from "./FirstDropDownList";
+import { objectArray } from "./ObjectArray";
 import { Modal, Button, Popover } from "antd";
 import { FiFilter } from "react-icons/fi";
-// import { Multiselect } from "multiselect-react-dropdown";
 import MultiSelect from "react-multi-select-component";
 import "antd/dist/antd.css";
-// import {
-//   CheckBoxSelection,
-//   Inject,
-//   MultiSelectComponent
-// } from "@syncfusion/ej2-react-dropdowns";
-export default function App() {
-  const objectArray = [
-    { label: "Grapes 🍇", value: "grapes" },
-    { label: "Mango 🥭", value: "mango" },
-    { label: "Strawberry 🍓", value: "strawberry" }
-  ];
-  const firstDropDownList = [
-    {
-      name: "Name",
-      status: "input",
-      content: [
-        { text: "contains" },
-        { text: "isequal" },
-        { text: "is not equal" },
-        { text: "does not equal" }
-      ]
-    },
-    {
-      name: "Assigness",
-      status: "mutliplenames",
-      content: [{ text: "contains" }, { text: "does not contains" }]
-    },
-    {
-      name: "Started",
-      status: "inputdate",
-      content: [
-        { text: "isbefore" },
-        { text: "is after" },
-        { text: "is between" }
-      ]
-    },
-    {
-      name: "Activity",
-      status: "inputdate",
-      content: [
-        { text: "isbefore" },
-        { text: "is after" },
-        { text: "is between" }
-      ]
-    },
-    {
-      name: "Due",
-      status: "inputdate",
-      content: [
-        { text: "isbefore" },
-        { text: "is after" },
-        { text: "is between" }
-      ]
-    },
-    {
-      name: "Completed",
-      status: "inputdate",
-      content: [
-        { text: "isbefore" },
-        { text: "is after" },
-        { text: "is between" }
-      ]
-    },
-    {
-      name: "Status",
-      status: "mutliplecolors",
-      content: [{ text: "contains" }, { text: "does not contains" }]
-    },
-    {
-      name: "OverDueTask",
-      status: "mutliplecolors",
-      content: [{ text: "contains" }, { text: "does not contains" }]
-    },
-    {
-      name: "TaskCOmpleted",
-      status: "mutliplecolors",
-      content: [{ text: "contains" }, { text: "does not contains" }]
-    }
-  ];
 
-  const [fields, setFields] = useState([{ value: null }]);
+export default function App() {
+  const [fields, setFields] = useState([{ value: null, condition: " " }]);
   const [filterdata, setfilterData] = useState(data);
   const [condition, setCondition] = useState(false);
-  const [first, setFirst] = useState("age");
-  const [second, setSecond] = useState("age");
-  const [firstValue, setFirstValue] = useState("age");
-  const [secondValue, setSecondValue] = useState("age");
+  const [first, setFirst] = useState("Name");
+  const [second, setSecond] = useState("Name");
+  const [third, setThird] = useState("Name");
+  const [firstValue, setFirstValue] = useState("Name");
+  const [secondValue, setSecondValue] = useState("Name");
+  const [thirdValue, setThirdValue] = useState("Name");
   const [isChecked, setIsChecked] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selected, setSelected] = useState([]);
@@ -137,11 +62,12 @@ export default function App() {
     return filterdata.map((user, index) => {
       return (
         <tr key={index}>
-          <td> {user.name} </td>
-          <td> {user.age} </td>
-          <td>{user.attendance} </td>
-          <td>{user.rating} </td>
-          <td> {user.college} </td>
+          <td> {user.Name} </td>
+          <td> {user.WORKFLOW} </td>
+          <td>{user.ASSIGNESS} </td>
+          <td>{user.ACTIVITY} </td>
+          <td> {user.TASKCOMPLETED} </td>
+          <td>{user.Status}</td>
         </tr>
       );
     });
@@ -170,23 +96,6 @@ export default function App() {
     setFields(values);
   }
 
-  // const handleSingleCheck = (e) => {
-  //   setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
-  // };
-  // const checkedItemList = () => {
-  //   filterdata.map((test, index) => (
-  //     <div key={index}>
-  //       <label>{test.name}</label>
-  //       <input
-  //         type="checkbox"
-  //         name={test.name}
-  //         checked={isChecked[test.name]}
-  //         onChange={handleSingleCheck}
-  //       />
-  //     </div>
-  //   ));
-  //   // setfilterData(checktedItemData);
-  // };
   const content = (idx) => (
     <div className="pop-over-modal">
       {/* <Modal
@@ -237,31 +146,43 @@ export default function App() {
                   );
                 })}
               </select>
-              {
-                <div>
-                  {" "}
+
+              {first === "status" ||
+              first === "OverDueTask" ||
+              first === "TaskCompleted" ? (
+                <select onChange={() => setThird(e.target.value)}>
                   {firstDropDownList.map((i, n) => {
-                    console.log(i.status, "status");
-                    if (i.status === "input") {
-                      return (
-                        // <select><option>{i.status}</option> </select>
-                        <input placeholder="hee" />
-                      );
-                    } else if (i.status === "mutliplenames") {
-                      <select>
-                        <option>{i.status}</option>{" "}
-                      </select>;
-                    }
-                  })}{" "}
-                </div>
-              }
-              <MultiSelect
+                    return (
+                      first === i.name &&
+                      i.content.map((item, idx) => {
+                        return <option key={n}>{item.text}</option>;
+                      })
+                    );
+                  })}
+                </select>
+              ) : first === "Name" ? (
+                <input type="tetx" />
+              ) : first === "Assigness" ? (
+                <select onChange={() => setThird(e.target.value)}>
+                  {firstDropDownList.map((i, n) => {
+                    return (
+                      first === i.name &&
+                      i.content.map((item, idx) => {
+                        return <option key={idx}>{item.text}</option>;
+                      })
+                    );
+                  })}
+                </select>
+              ) : (
+                <input type="date" />
+              )}
+              {/* <MultiSelect
                 options={objectArray}
                 value={selected}
                 onChange={setSecond}
                 displayValue="key"
                 labelledBy={"Select"}
-              />
+              /> */}
             </div>
           );
         } else {
@@ -287,13 +208,6 @@ export default function App() {
                 {firstDropDownList.map((item, index) => {
                   return <option value={item.name}>{item.name}</option>;
                 })}
-                {/* <option value="Name">Name</option>
-                <option value="Assigness">Assigness</option>
-                <option value="Started">Started</option>
-                <option value="Activity">Activity</option>
-                <option value="Due">Due</option>
-                <option value="Completed">Completed</option>
-                <option value="Status">Status</option> */}
               </select>
               <select
                 onChange={(e) => setSecondValue(e.target.value)}
@@ -308,14 +222,47 @@ export default function App() {
                   );
                 })}
               </select>
+              {firstValue === "status" ||
+              firstValue === "OverDueTask" ||
+              firstValue === "TaskCompleted" ? (
+                <select onChange={(e) => setThirdValue(e.target.value)}>
+                  {firstDropDownList.map((item, idx) => {
+                    return (
+                      firstValue === item.name &&
+                      item.content.map((item, idx) => {
+                        return <option key={idx}>{item.text}</option>;
+                      })
+                    );
+                  })}
+                </select>
+              ) : firstValue === "Name" ? (
+                <input type="text" />
+              ) : firstValue === "Assigness" ? (
+                <select onChange={(e) => setThirdValue(e.target.value)}>
+                  {firstDropDownList.map((i, d) => {
+                    return (
+                      firstValue === i.name &&
+                      i.content.map((item, idx) => {
+                        return (
+                          <option key={idx} value={item.name}>
+                            {item.text}
+                          </option>
+                        );
+                      })
+                    );
+                  })}
+                </select>
+              ) : (
+                <input type="date" />
+              )}
 
-              <MultiSelect
+              {/* <MultiSelect
                 options={firstDropDownList}
                 value={selected}
                 onChange={setSelected}
                 displayValue="status"
                 labelledBy={"Select"}
-              />
+              /> */}
             </div>
           );
         }
@@ -333,27 +280,35 @@ export default function App() {
 
   return (
     <div className="App">
-      <input
-        className="main-search"
-        type="text"
-        placeholder="Search here"
-        onChange={(e) => filterFunction(e.target.value.toString())}
-      ></input>
-      <Popover content={content}>
-        <Button className="filter-btn" onClick={showModal}>
-          <div className="filter-btn-text">
-            <FiFilter /> Filter
-          </div>
-        </Button>
-      </Popover>
+      <div className="input-filter-btn">
+        <div>
+          <input
+            className="main-search"
+            type="text"
+            placeholder="Search here"
+            onChange={(e) => filterFunction(e.target.value.toString())}
+          ></input>
+        </div>
+
+        <div className="filter">
+          <Popover content={content} trigger="click">
+            <div className="filter-btn">
+              <div className="ft-text">
+                <FiFilter /> Filters
+              </div>
+            </div>
+          </Popover>
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
-            <th>name</th>
-            <th>age</th>
-            <th>attendance </th>
-            <th> rating</th>
-            <th>college</th>
+            <th>Name</th>
+            <th>WORKFLOW</th>
+            <th>ASSIGNESS </th>
+            <th> ACTIVITY</th>
+            <th>TASK COMPLETED</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>{tableData()}</tbody>

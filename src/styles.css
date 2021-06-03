@@ -19,28 +19,6 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.ant-btn,
-.filter-btn {
-  background-color: #ebf4fb !important;
-  border-color: #0079ca !important;
-  color: #0079ca !important;
-  font-weight: 500 !important;
-  padding: 10px 20px 35px 20px !important;
-  margin-left: 10px !important;
-  margin-top: 50px;
-}
-
-.ant-btn,
-.filter-btn:hover {
-  background-color: #0079ca;
-  color: #ebf4fb;
-  padding: 10px 20px 30px 20px;
-  margin-left: 10px;
-  font-weight: 500;
-}
-/* .ant-modal-content {
-  max-margin: -11% -70% 0 60%;
-} */
 .filter-options {
   margin: 20px 0 0 0;
   display: flex;
@@ -54,6 +32,12 @@ tr:nth-child(even) {
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+  background-color: white;
+}
+.show-btn {
+  font-size: 5px;
+  border: none;
+  font-weight: bold;
   background-color: white;
 }
 select {
@@ -82,16 +66,11 @@ select {
   border-radius: 5px;
 }
 
-svg {
-  /* padding-bottom: -; */
-  font-size: 20px;
+button.addfilter-btn {
+  padding: 20px;
+  color: #0079ca;
+  font-size: 12px;
 }
-/* #store {
-  overflow-y: scroll;
-  max-height: 110px;
-  max-width: 50%;
- 
- } */
 .addfilter-btn {
   border: none;
   background-color: white;
@@ -102,12 +81,50 @@ svg {
 }
 svg:not(:root) {
   overflow: hidden;
-
+  font-size: 17px;
   /* padding-top: 10px; */
 }
 .filter-btn-text {
-  font-size: 22px;
+  font-size: 19px;
+  background-color: #ebf4fb;
+  border: 2px solid #2e7db3;
+  color: #0079ca;
+  font-weight: 500;
+  padding: 10px 18px 10px 17px;
+
+  border-radius: 5px;
+}
+.filter-btn-text:hover {
+  background-color: #0079ca;
+  color: white;
 }
 input.main-search {
   padding-top: 20px;
+}
+
+.input-filter-btn {
+  display: flex;
+  justify-content: space-around;
+  max-width: 32%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.filter {
+  width: 100px;
+}
+.filter-btn {
+  padding: 15px 0 15px 0px;
+  background-color: #ebf4fb;
+  border-color: #0079ca;
+  color: #0079ca;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 2px solid #0079ca;
+}
+.filter-btn:hover {
+  background-color: #0079ca;
+  color: #ebf4fb;
+}
+.ft-text {
+  font-size: 17px;
 }
