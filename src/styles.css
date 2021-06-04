@@ -52,6 +52,7 @@ select {
   padding-top: 7px;
   text-align: left;
   margin-right: 3% !important;
+  cursor: pointer;
 }
 /* #store>option{
   height: 50vh !important;
@@ -127,4 +128,9 @@ input.main-search {
 }
 .ft-text {
   font-size: 17px;
+}
+.first-input,
+.second-input {
+  border: 2px solid #0079ca !important ;
+  width: 100% !important;
 }

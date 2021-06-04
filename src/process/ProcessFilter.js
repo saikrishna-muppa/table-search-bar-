@@ -154,21 +154,21 @@ export default function App() {
                   {firstDropDownList.map((i, n) => {
                     return (
                       first === i.name &&
-                      i.content.map((item, idx) => {
-                        return <option key={n}>{item.text}</option>;
+                      i.colors.map((item, idx) => {
+                        return <option key={n}>{item.colorValue}</option>;
                       })
                     );
                   })}
                 </select>
               ) : first === "Name" ? (
-                <input type="tetx" />
+                <input type="text" className="first-input" />
               ) : first === "Assigness" ? (
                 <select onChange={() => setThird(e.target.value)}>
                   {firstDropDownList.map((i, n) => {
                     return (
                       first === i.name &&
-                      i.content.map((item, idx) => {
-                        return <option key={idx}>{item.text}</option>;
+                      i.select.map((item, idx) => {
+                        return <option key={idx}>{item.value}</option>;
                       })
                     );
                   })}
@@ -217,7 +217,7 @@ export default function App() {
                   return (
                     item.name === firstValue &&
                     item.content.map((val, idx) => {
-                      return <option value={val.text}>{val.text}</option>;
+                      return <option value={val.text}>{val.text} </option>;
                     })
                   );
                 })}
@@ -229,23 +229,23 @@ export default function App() {
                   {firstDropDownList.map((item, idx) => {
                     return (
                       firstValue === item.name &&
-                      item.content.map((item, idx) => {
-                        return <option key={idx}>{item.text}</option>;
+                      item.colors.map((item, idx) => {
+                        return <option key={idx}>{item.colorValue}</option>;
                       })
                     );
                   })}
                 </select>
               ) : firstValue === "Name" ? (
-                <input type="text" />
+                <input type="text" className="second-input" />
               ) : firstValue === "Assigness" ? (
                 <select onChange={(e) => setThirdValue(e.target.value)}>
                   {firstDropDownList.map((i, d) => {
                     return (
                       firstValue === i.name &&
-                      i.content.map((item, idx) => {
+                      i.select.map((item, idx) => {
                         return (
                           <option key={idx} value={item.name}>
-                            {item.text}
+                            {item.value}
                           </option>
                         );
                       })

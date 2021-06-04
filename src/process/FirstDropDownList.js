@@ -81,7 +81,14 @@ export const firstDropDownList = [
   {
     name: "Assigness",
     status: "mutliplenames",
-    content: [{ text: "contains" }, { text: "does not contains" }]
+    content: [{ text: "contains" }, { text: "does not contains" }],
+    select: [
+      { value: "CurrentUser" },
+      { value: "Finance" },
+      { value: "Human Resources" },
+      { value: "Marketing" },
+      { value: "Sales" }
+    ]
   },
   {
     name: "Started",
@@ -122,16 +129,37 @@ export const firstDropDownList = [
   {
     name: "status",
     status: "mutliplecolors",
-    content: [{ text: "contains" }, { text: "does not contains" }]
+    content: [{ text: "contains" }, { text: "does not contains" }],
+    colors: [
+      { colorValue: "Archived" },
+      { colorValue: "Completed" },
+      { colorValue: "Due Soon" },
+      { colorValue: "on_Track" },
+      { colorValue: "Overdue" }
+    ]
   },
   {
     name: "OverDueTask",
     status: "mutliplecolors",
-    content: [{ text: "contains" }, { text: "does not contains" }]
+    content: [{ text: "contains" }, { text: "does not contains" }],
+    colors: [
+      { colorValue: "Archived" },
+      { colorValue: "Completed" },
+      { colorValue: "Due Soon" },
+      { colorValue: "on_Track" },
+      { colorValue: "Overdue" }
+    ]
   },
   {
     name: "TaskCompleted",
     status: "mutliplecolors",
-    content: [{ text: "contains" }, { text: "does not contains" }]
+    content: [{ text: "contains" }, { text: "does not contains" }],
+    colors: [
+      { colorValue: "Archived" },
+      { colorValue: "Completed" },
+      { colorValue: "Due Soon" },
+      { colorValue: "on_Track" },
+      { colorValue: "Overdue" }
+    ]
   }
 ];
